@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Collectable : MonoBehaviour {
+public abstract class CropAI : MonoBehaviour {
 
     private bool triggered = false;
     protected abstract void CustomBehavior();
