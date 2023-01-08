@@ -18,3 +18,4 @@ MonoBehaviour:
   spawnCount: 3
   growingTime: 5
   timeToFlee: 10
+  numSoulsDropped: 20
