@@ -5,6 +5,7 @@ using UnityEngine;
 public class HarvestableSquirrel : Harvestable {
     private static readonly float SOUL_ANIMATION_TIME = 0.5f;
     private static readonly float ARC_MAX_Y = 1f;
+    private static readonly float SPEED = 1f;
 
     public override void Harvest() {
         for (int i = 0; i < 10; i++) {
@@ -28,4 +29,16 @@ public class HarvestableSquirrel : Harvestable {
         }
         Destroy(this.gameObject);
     }
-}
+
+    // Update is called once per frame
+    void Update() {
+        // move away from player
+        float step = SPEED * Time.deltaTime; // calculate distance to move
+        var playerPosition = PlayerController.Instance.transform.position;
+        Vector2 directionToPlayer = playerPosition - this.transform.position;
+        Vector2 targetDirection = -directionToPlayer;
+        Vector3 targetPosition = Vector2.MoveTowards(this.transform.position, (Vector2)this.transform.position + targetDirection, step);
+        targetPosition.z = this.transform.position.z;
+        this.transform.position = targetPosition;
+    }
+ }
