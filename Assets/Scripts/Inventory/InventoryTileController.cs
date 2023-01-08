@@ -13,6 +13,7 @@ public class InventoryTileController : MonoBehaviour
 
     public GameObject quantityParentObject;
     public TMPro.TMP_Text quantityText;
+    public GameObject backgroundHighlight;
     public Image uiImage;
 
     public bool isEmpty = true;
@@ -23,13 +24,27 @@ public class InventoryTileController : MonoBehaviour
         if (itemType != InventoryManager.ItemType.SCYTHE) {
             itemType = InventoryManager.ItemType.UNKNOWN;
             quantity = 0;
-            uiImage.sprite = null;
+            SetSprite(null);
         }
+        UnhighlightItem();
         RefreshGUI();
     }
 
     public void SetSprite(Sprite sprite) {
-        this.uiImage.sprite = sprite;
+        if (!sprite) {
+            this.uiImage.gameObject.SetActive(false);
+        } else {
+            this.uiImage.gameObject.SetActive(true);
+            this.uiImage.sprite = sprite;
+        }
+    }
+
+    public void HighlightItem() {
+        backgroundHighlight.SetActive(true);
+    }
+
+    public void UnhighlightItem() {
+        backgroundHighlight.SetActive(false);
     }
 
     public bool CanAdd(InventoryManager.ItemType itemType) {

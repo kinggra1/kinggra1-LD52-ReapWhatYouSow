@@ -9,7 +9,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public GameObject squirrelCropPrefab;
     public GameObject humanCropPrefab;
 
-    private static readonly int MAX_SLOTS = 9;
+    private static readonly int MAX_SLOTS = 7;
 
     // The object that contains LayoutGroup of multiple Inventory Slots
     public GameObject inventorySlotsParent;
@@ -29,6 +29,7 @@ public class InventoryManager : Singleton<InventoryManager>
             inventorySlot.Reset();
             inventorySlots.Add(inventorySlot);
         }
+        SetCurrentItemIndex(0); // Default to scythe, which is in the first slot hardcoded
 
         soulCountText.text = soulCount.ToString();
     }
@@ -130,6 +131,8 @@ public class InventoryManager : Singleton<InventoryManager>
     }
 
     private void SetCurrentItemIndex(int index) {
+        inventorySlots[currentItemIndex].UnhighlightItem();
+
         if (index < 0) {
             index += MAX_SLOTS;
         }
@@ -151,6 +154,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 break;
         }
 
+        inventorySlots[index].HighlightItem();
         currentItemIndex = index;
     }
 
@@ -158,9 +162,9 @@ public class InventoryManager : Singleton<InventoryManager>
     void Update()
     {
         if (Input.mouseScrollDelta.y > 0f) {
-            SetCurrentItemIndex(currentItemIndex + 1);
-        } else if (Input.mouseScrollDelta.y < 0f) {
             SetCurrentItemIndex(currentItemIndex - 1);
+        } else if (Input.mouseScrollDelta.y < 0f) {
+            SetCurrentItemIndex(currentItemIndex + 1);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
