@@ -4,33 +4,43 @@ using UnityEngine;
 
 public class PlayerController : Singleton<PlayerController> {
 
-    private static readonly float MAX_X_MOVE_SPEED = 3f;
-    private static readonly float MAX_Y_MOVE_SPEED = 3f;
-    private static readonly float MAX_OVERALL_MOVE_SPEED = 3f;
+    private static readonly float MAX_X_MOVE_SPEED = 5f;
+    private static readonly float MAX_Y_MOVE_SPEED = 5f;
+    private static readonly float MAX_OVERALL_MOVE_SPEED = 5f;
     private static readonly float MAX_IFRAMES = 1f;
 
-    private static readonly float MIN_X_POS = -13.3f;
-    private static readonly float MAX_X_POS = 13.3f;
-    private static readonly float MIN_Y_POS = -7.3f;
-    private static readonly float MAX_Y_POS = 6.6f;
+    private static readonly float MIN_X_POS = -14.5f;
+    private static readonly float MAX_X_POS = 14.5f;
+    private static readonly float MIN_Y_POS = -7f;
+    private static readonly float MAX_Y_POS = 7f;
 
     private static readonly float MAX_AIM_VARIANCE = 35f; // Degrees to either side of aimed point.
 
     public Collider2D scythCollider;
 
     private Rigidbody2D rb;
+    private Collider2D[] scythedObjects = new Collider2D[1000];
 
     // Inputs from Update used in FixedUpdate.
     private float xInput;
     private float yInput;
     private bool attackButtonPressed;
-    private bool firestormPressed;
 
+    private bool shopInRange = false;
+    private bool plantingInRange = false;
     private float currentIFrames = MAX_IFRAMES;
 
     // Start is called before the first frame update
     void Start(){
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void SetShopInRange(bool shopInRange) {
+        this.shopInRange = shopInRange;
+    }
+
+    public void SetPlantingInRange(bool plantingInRange) {
+        this.plantingInRange = plantingInRange;
     }
 
     private void Update() {
@@ -43,10 +53,6 @@ public class PlayerController : Singleton<PlayerController> {
 
         if (!attackButtonPressed) {
             attackButtonPressed = Input.GetMouseButtonDown(0);
-        }
-
-        if (!firestormPressed) {
-            // firestormPressed = Input.GetMouseButton(1);
         }
 
         if (currentIFrames > 0) {
@@ -64,10 +70,14 @@ public class PlayerController : Singleton<PlayerController> {
 
         if (attackButtonPressed) {
             attackButtonPressed = false;
-        }
 
-        if (firestormPressed) {
-            firestormPressed = false;
+            if (shopInRange) {
+                OpenShop();
+            } else if (plantingInRange) {
+                TryPlanting();
+            } else {
+                TryUseItem();
+            }
         }
 
         Vector3 inputPositionChange = 
@@ -94,6 +104,30 @@ public class PlayerController : Singleton<PlayerController> {
         localScale.x = Mathf.Abs(localScale.x) * (leftOfPlayer ? -1 : 1);
 
         this.transform.localScale = localScale;
+    }
+
+    private void OpenShop() {
+        ShopController.Instance.OpenShop();
+    }
+
+    private void TryPlanting() {
+
+    }
+    private void TryUseItem() {
+
+    }
+
+    private void SwingScythe() {
+        ContactFilter2D filter = new ContactFilter2D();
+        int numObjects = scythCollider.OverlapCollider(filter, scythedObjects);
+
+        for (int i = 0; i < numObjects; i++) {
+            Collider2D scythedObject = scythedObjects[i];
+            Harvestable harvestable = scythedObject.GetComponent<Harvestable>();
+            if (harvestable) {
+                harvestable.Harvest();
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
