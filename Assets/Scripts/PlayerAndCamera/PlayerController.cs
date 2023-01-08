@@ -114,7 +114,7 @@ public class PlayerController : Singleton<PlayerController> {
 
     }
     private void TryUseItem() {
-
+        SwingScythe();
     }
 
     private void SwingScythe() {
