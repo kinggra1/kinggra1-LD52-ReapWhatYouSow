@@ -75,7 +75,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public void SwingScythe() {
         ContactFilter2D filter = new ContactFilter2D();
         filter.useTriggers = true;
-        int numObjects = PlayerController.Instance.scythCollider.OverlapCollider(filter, scythedObjects);
+        int numObjects = PlayerController.Instance.scytheCollider.OverlapCollider(filter, scythedObjects);
 
         for (int i = 0; i < numObjects; i++) {
             Collider2D scythedObject = scythedObjects[i];

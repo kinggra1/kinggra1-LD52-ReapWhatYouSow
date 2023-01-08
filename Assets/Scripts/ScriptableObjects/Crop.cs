@@ -18,5 +18,7 @@ public class Crop : ScriptableObject {
     // How long until a fully grown crop starts fleeing.
     public float timeToFlee;
 
+    public int numSoulsDropped;
+
     // Add in a more complex object to determine number/types of souls dropped.
 }

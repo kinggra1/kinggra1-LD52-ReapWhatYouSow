@@ -16,7 +16,9 @@ public class PlayerController : Singleton<PlayerController> {
 
     private static readonly float MAX_AIM_VARIANCE = 35f; // Degrees to either side of aimed point.
 
-    public Collider2D scythCollider;
+    public Collider2D scytheCollider;
+    public GameObject scytheCrosshairObject;
+    public GameObject scytheSwingObject;
 
     private Rigidbody2D rb;
 
@@ -32,6 +34,8 @@ public class PlayerController : Singleton<PlayerController> {
     // Start is called before the first frame update
     void Start(){
         rb = GetComponent<Rigidbody2D>();
+        scytheSwingObject.SetActive(false);
+        scytheCrosshairObject.SetActive(true);
     }
 
     public void SetShopInRange(bool shopInRange) {
@@ -40,6 +44,23 @@ public class PlayerController : Singleton<PlayerController> {
 
     public void SetPlantingInRange(bool plantingInRange) {
         this.plantingInRange = plantingInRange;
+    }
+
+    public void ShowScythe() {
+        scytheCrosshairObject.SetActive(true);
+    }
+
+    public void HideScythe() {
+        scytheCrosshairObject.SetActive(false);
+    }
+
+    public void ShowSwingScytheAnimation() {
+        scytheSwingObject.SetActive(true);
+        Invoke("HideSwingScytheAnimation", 0.2f);
+    }
+
+    private void HideSwingScytheAnimation() {
+        scytheSwingObject.SetActive(false);
     }
 
     private void Update() {
