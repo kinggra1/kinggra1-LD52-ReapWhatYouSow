@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1aa4e34f86dac043bc8a25f30f86fcf, type: 3}
   m_Name: SoulOne
   m_EditorClassIdentifier: 
-  sprite: {fileID: 7713173458634685236, guid: 61d3d80b25cd33545b4ebb729858e761, type: 3}
+  prefab: {fileID: 5950269937499749648, guid: 61d3d80b25cd33545b4ebb729858e761, type: 3}
   value: 1

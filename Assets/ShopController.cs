@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopController : Singleton<ShopController>
+public class ShopController : MonoBehaviour
 {
     public GameObject interactionPrompt;
 
@@ -18,14 +18,6 @@ public class ShopController : Singleton<ShopController>
     void Update()
     {
         
-    }
-
-    public void OpenShop() {
-        GameManager.Instance.Pause();
-    }
-
-    public void CloseShop() {
-        GameManager.Instance.Play();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

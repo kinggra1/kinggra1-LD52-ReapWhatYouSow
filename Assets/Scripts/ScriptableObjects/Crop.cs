@@ -4,7 +4,10 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Crop", menuName = "Farming/Crop", order = 51)]
 public class Crop : ScriptableObject {
-    public FarmingManager.CropType type;
+
+    public InventoryManager.ItemType type;
+    public Sprite uiSeedSprite;
+
     // How long it takes to go from planted to fully grown.
     public int growingTime;
     // How long until a fully grown crop starts fleeing.

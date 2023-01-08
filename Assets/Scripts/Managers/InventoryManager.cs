@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : Singleton<InventoryManager>
 {
     public enum ItemType { SCYTHE, SQUIRREL_SEED, HUMAN_SEED}
 
@@ -15,15 +15,14 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         foreach(InventoryTileController inventorySlot in inventorySlotsParent.GetComponentsInChildren<InventoryTileController>()) {
-            Debug.Log(inventorySlot);
             inventorySlot.Reset();
             inventorySlots.Add(inventorySlot);
         }
     }
 
-    public bool CanPickUp(ItemType itemType) {
+    public bool CanPickUp(Crop cropSeed) {
         foreach (InventoryTileController inventorySlot in inventorySlots) {
-            if (inventorySlot.CanAdd(itemType)) {
+            if (inventorySlot.CanAdd(cropSeed.type)) {
                 return true;
             }
         }
@@ -31,18 +30,49 @@ public class InventoryManager : MonoBehaviour
     }
 
     // Calls to this should be guarded with CanPickUp, it assumes that there will always be an eligible slot.
-    public bool PickUp(ItemType itemType) {
+    public void PickUp(Crop cropSeed) {
         foreach (InventoryTileController inventorySlot in inventorySlots) {
-            if (inventorySlot.CanAdd(itemType)) {
-                inventorySlot.CanAdd(itemType);
+            if (inventorySlot.CanAdd(cropSeed.type)) {
+                inventorySlot.Add(cropSeed.type);
+                inventorySlot.SetSprite(cropSeed.uiSeedSprite);
+                return;
             }
         }
-        return false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) {
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4)) {
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5)) {
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6)) {
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7)) {
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8)) {
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9)) {
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0)) {
+
+        }
+
     }
 }

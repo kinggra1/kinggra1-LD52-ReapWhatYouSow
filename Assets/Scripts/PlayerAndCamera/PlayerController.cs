@@ -107,7 +107,7 @@ public class PlayerController : Singleton<PlayerController> {
     }
 
     private void OpenShop() {
-        ShopController.Instance.OpenShop();
+        ShopManager.Instance.OpenShop();
     }
 
     private void TryPlanting() {
@@ -119,6 +119,7 @@ public class PlayerController : Singleton<PlayerController> {
 
     private void SwingScythe() {
         ContactFilter2D filter = new ContactFilter2D();
+        filter.useTriggers = true;
         int numObjects = scythCollider.OverlapCollider(filter, scythedObjects);
 
         for (int i = 0; i < numObjects; i++) {
