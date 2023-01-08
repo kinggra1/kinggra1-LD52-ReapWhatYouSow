@@ -81,7 +81,7 @@ public class InventoryManager : Singleton<InventoryManager>
         for (int i = 0; i < numObjects; i++) {
             Collider2D scythedObject = scythedObjects[i];
             Harvestable harvestable = scythedObject.GetComponent<Harvestable>();
-            if (harvestable) {
+            if (harvestable && harvestable.CanHarvest()) {
                 harvestable.Harvest();
             }
         }

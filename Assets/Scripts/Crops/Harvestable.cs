@@ -12,8 +12,6 @@ public abstract class Harvestable : MonoBehaviour {
     public Crop cropData;
 
     private float stateTimer = 0f;
-    private bool isGrown = false;
-    private bool isFleeing = false;
 
     protected abstract void FleeingBehavior();
     protected abstract void RipeBehavior();
@@ -70,6 +68,13 @@ public abstract class Harvestable : MonoBehaviour {
                 FleeingBehavior();
                 break;
         }
+    }
+
+    public bool CanHarvest() {
+        if (this.currentState != State.GROWING) {
+            return true;
+        }
+        return false;
     }
 
     private void SetState(State state) {
