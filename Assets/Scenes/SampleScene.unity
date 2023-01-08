@@ -915,13 +915,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444655991}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1310505681}
-  m_RootOrder: 1
+  m_Father: {fileID: 1173381706}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &444655993
 PolygonCollider2D:
@@ -3376,6 +3376,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61d3d80b25cd33545b4ebb729858e761, type: 3}
+--- !u!1 &1173381705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1173381706}
+  - component: {fileID: 1173381707}
+  m_Layer: 0
+  m_Name: ScytheVisualsParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1173381706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173381705}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 444655992}
+  - {fileID: 1474023285}
+  - {fileID: 2093820055}
+  - {fileID: 1386842143}
+  m_Father: {fileID: 1310505681}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1173381707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173381705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c912ad4a0e6b98e49a7e9d37c8a1e904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1220996313
 GameObject:
   m_ObjectHideFlags: 0
@@ -3720,7 +3768,6 @@ GameObject:
   - component: {fileID: 1310505681}
   - component: {fileID: 1310505682}
   - component: {fileID: 1310505683}
-  - component: {fileID: 1310505685}
   - component: {fileID: 1310505686}
   m_Layer: 0
   m_Name: Player
@@ -3742,10 +3789,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 287572334}
-  - {fileID: 444655992}
-  - {fileID: 1474023285}
-  - {fileID: 2093820055}
-  - {fileID: 1386842143}
+  - {fileID: 1173381706}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3785,18 +3829,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1310505685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1310505680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c912ad4a0e6b98e49a7e9d37c8a1e904, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1310505686
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4101,8 +4133,8 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1310505681}
-  m_RootOrder: 4
+  m_Father: {fileID: 1173381706}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1386842144
 SpriteRenderer:
@@ -4466,7 +4498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1474023285
 Transform:
   m_ObjectHideFlags: 0
@@ -4474,13 +4506,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474023284}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1310505681}
-  m_RootOrder: 2
+  m_Father: {fileID: 1173381706}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1474023286
 CircleCollider2D:
@@ -6596,8 +6628,8 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1310505681}
-  m_RootOrder: 3
+  m_Father: {fileID: 1173381706}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2093820056
 SpriteRenderer:
