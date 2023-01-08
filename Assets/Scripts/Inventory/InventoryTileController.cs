@@ -11,6 +11,7 @@ public class InventoryTileController : MonoBehaviour
     public InventoryManager.ItemType itemType;
     public bool isStackable = true;
 
+    public GameObject quantityParentObject;
     public TMPro.TMP_Text quantityText;
     public Image uiImage;
 
@@ -18,8 +19,12 @@ public class InventoryTileController : MonoBehaviour
     private int quantity;
 
     public void Reset() {
-        quantity = 0;
-        uiImage.sprite = null;
+        // Keep scythe as is (special hacky case).
+        if (itemType != InventoryManager.ItemType.SCYTHE) {
+            itemType = InventoryManager.ItemType.UNKNOWN;
+            quantity = 0;
+            uiImage.sprite = null;
+        }
         RefreshGUI();
     }
 
@@ -50,6 +55,11 @@ public class InventoryTileController : MonoBehaviour
     }
 
     private void RefreshGUI() {
-        quantityText.text = quantity.ToString();
+        if (!isStackable || quantity == 0) {
+            quantityParentObject.SetActive(false);
+        } else {
+            quantityParentObject.SetActive(true);
+            quantityText.text = quantity.ToString();
+        }
     }
 }

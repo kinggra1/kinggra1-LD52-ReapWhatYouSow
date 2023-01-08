@@ -26,9 +26,7 @@ public class InventoryManager : Singleton<InventoryManager>
     void Start()
     {
         foreach (InventoryTileController inventorySlot in inventorySlotsParent.GetComponentsInChildren<InventoryTileController>()) {
-            if (inventorySlot.itemType != ItemType.SCYTHE) {
-                inventorySlot.Reset();
-            }
+            inventorySlot.Reset();
             inventorySlots.Add(inventorySlot);
         }
 
