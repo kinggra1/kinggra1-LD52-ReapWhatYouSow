@@ -19,7 +19,6 @@ public class PlayerController : Singleton<PlayerController> {
     public Collider2D scythCollider;
 
     private Rigidbody2D rb;
-    private Collider2D[] scythedObjects = new Collider2D[1000];
 
     // Inputs from Update used in FixedUpdate.
     private float xInput;
@@ -72,11 +71,9 @@ public class PlayerController : Singleton<PlayerController> {
             attackButtonPressed = false;
 
             if (shopInRange) {
-                OpenShop();
-            } else if (plantingInRange) {
-                TryPlanting();
+                ShopManager.Instance.OpenShop();
             } else {
-                TryUseItem();
+                InventoryManager.Instance.TryUseCurrentItem();
             }
         }
 
@@ -104,31 +101,6 @@ public class PlayerController : Singleton<PlayerController> {
         localScale.x = Mathf.Abs(localScale.x) * (leftOfPlayer ? -1 : 1);
 
         this.transform.localScale = localScale;
-    }
-
-    private void OpenShop() {
-        ShopManager.Instance.OpenShop();
-    }
-
-    private void TryPlanting() {
-
-    }
-    private void TryUseItem() {
-        SwingScythe();
-    }
-
-    private void SwingScythe() {
-        ContactFilter2D filter = new ContactFilter2D();
-        filter.useTriggers = true;
-        int numObjects = scythCollider.OverlapCollider(filter, scythedObjects);
-
-        for (int i = 0; i < numObjects; i++) {
-            Collider2D scythedObject = scythedObjects[i];
-            Harvestable harvestable = scythedObject.GetComponent<Harvestable>();
-            if (harvestable) {
-                harvestable.Harvest();
-            }
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

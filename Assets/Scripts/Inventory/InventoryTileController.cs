@@ -28,7 +28,7 @@ public class InventoryTileController : MonoBehaviour
     }
 
     public bool CanAdd(InventoryManager.ItemType itemType) {
-        return isEmpty || (itemType == this.itemType && quantity < MAX_COUNT);
+        return isEmpty || (itemType == this.itemType && isStackable && quantity < MAX_COUNT);
     }
 
     public void Add(InventoryManager.ItemType itemType) {
@@ -36,6 +36,15 @@ public class InventoryTileController : MonoBehaviour
             this.itemType = itemType;
         }
         quantity = Mathf.Clamp(quantity + 1, 0, MAX_COUNT);
+        RefreshGUI();
+    }
+
+    public void Decrement() {
+        quantity = Mathf.Clamp(quantity - 1, 0, MAX_COUNT);
+        if (quantity == 0) {
+            this.itemType = InventoryManager.ItemType.UNKNOWN;
+            this.SetSprite(null);
+        }
         RefreshGUI();
     }
 

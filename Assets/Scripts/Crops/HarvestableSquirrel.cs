@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HarvestableSquirrel : Harvestable {
-
     private static readonly float SOUL_ANIMATION_TIME = 0.5f;
     private static readonly float ARC_MAX_Y = 1f;
 

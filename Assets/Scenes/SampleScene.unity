@@ -1058,8 +1058,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03f13f62a72e9e419854df910a8c555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 0
-  isStackable: 1
+  itemType: 1
+  isStackable: 0
   quantityText: {fileID: 729525493}
   uiImage: {fileID: 616447389}
 --- !u!1 &444655991
@@ -1215,7 +1215,7 @@ RectTransform:
   m_Children:
   - {fileID: 1132820845}
   m_Father: {fileID: 720479440}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2211,8 +2211,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 480134829}
   - {fileID: 2113957529}
+  - {fileID: 480134829}
   - {fileID: 170851082}
   m_Father: {fileID: 0}
   m_RootOrder: 27
@@ -5224,6 +5224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventorySlotsParent: {fileID: 170851081}
+  soulCountText: {fileID: 0}
 --- !u!114 &1576636875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7124,7 +7125,7 @@ RectTransform:
   - {fileID: 1591821411}
   - {fileID: 868254693}
   m_Father: {fileID: 720479440}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

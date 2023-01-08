@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Harvestable : MonoBehaviour {
+
+    public Crop cropData;
     
     public abstract void Harvest();
 }
