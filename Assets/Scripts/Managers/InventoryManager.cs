@@ -9,7 +9,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public GameObject squirrelCropPrefab;
     public GameObject humanCropPrefab;
 
-    private static readonly int MAX_SLOTS = 10;
+    private static readonly int MAX_SLOTS = 9;
 
     // The object that contains LayoutGroup of multiple Inventory Slots
     public GameObject inventorySlotsParent;
@@ -73,6 +73,7 @@ public class InventoryManager : Singleton<InventoryManager>
     }
 
     public void SwingScythe() {
+        PlayerController.Instance.ShowSwingScytheAnimation();
         ContactFilter2D filter = new ContactFilter2D();
         filter.useTriggers = true;
         int numObjects = PlayerController.Instance.scytheCollider.OverlapCollider(filter, scythedObjects);
@@ -128,38 +129,69 @@ public class InventoryManager : Singleton<InventoryManager>
         soulCountText.text = soulCount.ToString();
     }
 
+    private void SetCurrentItemIndex(int index) {
+        if (index < 0) {
+            index += MAX_SLOTS;
+        }
+
+        if (index >= MAX_SLOTS) {
+            index = index % MAX_SLOTS;
+        }
+
+        PlayerController.Instance.HideScythe();
+        switch (inventorySlots[index].itemType) {
+            case ItemType.UNKNOWN:
+                break;
+            case ItemType.SCYTHE:
+                PlayerController.Instance.ShowScythe();
+                break;
+            case ItemType.SQUIRREL_SEED:
+                break;
+            case ItemType.HUMAN_SEED:
+                break;
+        }
+
+        currentItemIndex = index;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (Input.mouseScrollDelta.y > 0f) {
+            SetCurrentItemIndex(currentItemIndex + 1);
+        } else if (Input.mouseScrollDelta.y < 0f) {
+            SetCurrentItemIndex(currentItemIndex - 1);
+        }
+
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            currentItemIndex = 0;
+            SetCurrentItemIndex(0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            currentItemIndex = 1;
+            SetCurrentItemIndex(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3)) {
-            currentItemIndex = 2;
+            SetCurrentItemIndex(2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4)) {
-            currentItemIndex = 3;
+            SetCurrentItemIndex(3);
         }
         if (Input.GetKeyDown(KeyCode.Alpha5)) {
-            currentItemIndex = 4;
+            SetCurrentItemIndex(4);
         }
         if (Input.GetKeyDown(KeyCode.Alpha6)) {
-            currentItemIndex = 5;
+            SetCurrentItemIndex(5);
         }
         if (Input.GetKeyDown(KeyCode.Alpha7)) {
-            currentItemIndex = 6;
+            SetCurrentItemIndex(6);
         }
         if (Input.GetKeyDown(KeyCode.Alpha8)) {
-            currentItemIndex = 7;
+            SetCurrentItemIndex(7);
         }
         if (Input.GetKeyDown(KeyCode.Alpha9)) {
-            currentItemIndex = 8;
+            SetCurrentItemIndex(8);
         }
         if (Input.GetKeyDown(KeyCode.Alpha0)) {
-            currentItemIndex = 9;
+            SetCurrentItemIndex(9);
         }
 
     }
