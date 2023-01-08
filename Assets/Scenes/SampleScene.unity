@@ -3761,7 +3761,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dede0d5d96911a34eadd36052fbd62bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scythCollider: {fileID: 1474023286}
+  scytheCollider: {fileID: 444655993}
+  scytheCrosshairObject: {fileID: 2093820054}
+  scytheSwingObject: {fileID: 1386842142}
 --- !u!50 &1310505683
 Rigidbody2D:
   serializedVersion: 4
