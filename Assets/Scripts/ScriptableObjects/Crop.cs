@@ -8,12 +8,15 @@ public class Crop : ScriptableObject {
     public InventoryManager.ItemType type;
     public Sprite uiSeedSprite;
 
-    // How long it takes to go from planted to fully grown.
-    public int growingTime;
-    // How long until a fully grown crop starts fleeing.
-    public int timeToFlee;
+    // Number of souls that need to be spend to receive this Crop seed.
+    public int storeCost;
     // How many of the entity are farmed by this crop
     public int spawnCount;
+
+    // How long it takes to go from planted to fully grown.
+    public float growingTime;
+    // How long until a fully grown crop starts fleeing.
+    public float timeToFlee;
 
     // Add in a more complex object to determine number/types of souls dropped.
 }

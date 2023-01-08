@@ -7,6 +7,7 @@ public class HarvestableSquirrel : Harvestable {
     private static readonly float ARC_MAX_Y = 1f;
     private static readonly float SPEED = 1f;
 
+
     public override void Harvest() {
         for (int i = 0; i < 10; i++) {
             GameObject soul = Instantiate(FarmingManager.Instance.soulOnePrefab);
@@ -31,7 +32,7 @@ public class HarvestableSquirrel : Harvestable {
     }
 
     // Update is called once per frame
-    void Update() {
+    protected override void FleeingBehavior() {
         // move away from player
         float step = SPEED * Time.deltaTime; // calculate distance to move
         var playerPosition = PlayerController.Instance.transform.position;
@@ -41,4 +42,8 @@ public class HarvestableSquirrel : Harvestable {
         targetPosition.z = this.transform.position.z;
         this.transform.position = targetPosition;
     }
- }
+
+    protected override void RipeBehavior() {
+        this.transform.position += Vector3.right * (SPEED/2f) * Time.deltaTime;
+    }
+}

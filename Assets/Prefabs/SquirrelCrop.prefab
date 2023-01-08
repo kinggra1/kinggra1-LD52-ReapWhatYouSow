@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7307237977203720944}
   - component: {fileID: 984339587}
   m_Layer: 0
-  m_Name: Squirrel
+  m_Name: SquirrelCrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eebb859b0b37e545bb550a828780760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cropData: {fileID: 11400000, guid: c55a178ee806de34d8c6fc7068cf280f, type: 2}
 --- !u!61 &984339587
 BoxCollider2D:
   m_ObjectHideFlags: 0

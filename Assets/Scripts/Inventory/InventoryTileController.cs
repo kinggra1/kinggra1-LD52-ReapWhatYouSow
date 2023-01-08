@@ -14,7 +14,7 @@ public class InventoryTileController : MonoBehaviour
     public TMPro.TMP_Text quantityText;
     public Image uiImage;
 
-    private bool isEmpty = true;
+    public bool isEmpty = true;
     private int quantity;
 
     public void Reset() {
@@ -34,6 +34,7 @@ public class InventoryTileController : MonoBehaviour
     public void Add(InventoryManager.ItemType itemType) {
         if (isEmpty) {
             this.itemType = itemType;
+            isEmpty = false;
         }
         quantity = Mathf.Clamp(quantity + 1, 0, MAX_COUNT);
         RefreshGUI();

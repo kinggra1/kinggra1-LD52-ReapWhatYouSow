@@ -6,6 +6,9 @@ public class InventoryManager : Singleton<InventoryManager>
 {
     public enum ItemType { UNKNOWN, SCYTHE, SQUIRREL_SEED, HUMAN_SEED}
 
+    public GameObject squirrelCropPrefab;
+    public GameObject humanCropPrefab;
+
     private static readonly int MAX_SLOTS = 10;
 
     // The object that contains LayoutGroup of multiple Inventory Slots
@@ -28,6 +31,8 @@ public class InventoryManager : Singleton<InventoryManager>
             }
             inventorySlots.Add(inventorySlot);
         }
+
+        soulCountText.text = soulCount.ToString();
     }
 
     public bool CanPickUp(Crop cropSeed) {
@@ -92,23 +97,28 @@ public class InventoryManager : Singleton<InventoryManager>
             return false;
         }
 
+        GameObject seedPrefab = squirrelCropPrefab;
         switch (itemType) {
             case ItemType.UNKNOWN:
                 break;
             case ItemType.SCYTHE:
                 break;
             case ItemType.SQUIRREL_SEED:
-
+                seedPrefab = squirrelCropPrefab;
                 break;
             case ItemType.HUMAN_SEED:
                 break;
         }
+
+        GameObject spawnedCrop = Instantiate(seedPrefab);
+        spawnedCrop.transform.position = PlayerController.Instance.transform.position;
 
         return true;
     }
 
     public void AddSoul(int amount) {
         this.soulCount = Mathf.Clamp(this.soulCount + amount, 0, 999);
+        soulCountText.text = soulCount.ToString();
     }
 
     public bool CanSpendSoul(int amount) {
@@ -117,6 +127,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public void SpendSoul(int amount) {
         this.soulCount = Mathf.Clamp(this.soulCount - amount, 0, 999);
+        soulCountText.text = soulCount.ToString();
     }
 
     // Update is called once per frame

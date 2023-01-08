@@ -25,10 +25,12 @@ public class ShopManager : Singleton<ShopManager>
 
     // We've already committed to purchase here, any "CanPackUp" gating should block the UI element itself?
     public void BuySquirrelSeed() {
+        InventoryManager.Instance.SpendSoul(squirrelSeedData.storeCost);
         InventoryManager.Instance.PickUp(squirrelSeedData);
     }
 
     public void BuyHumanSeed() {
+        InventoryManager.Instance.SpendSoul(humanSeedData.storeCost);
         InventoryManager.Instance.PickUp(humanSeedData);
     }
 }
