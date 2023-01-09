@@ -18,4 +18,4 @@ MonoBehaviour:
   maxGrowthScale: 0.6
   growingTime: 3
   timeToFlee: 5
-  numSoulsDropped: 200
+  numSoulsDropped: 10

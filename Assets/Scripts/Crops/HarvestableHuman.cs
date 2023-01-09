@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class HarvestableHuman : Harvestable {
 
-    private static readonly float SPEED = 1.2f;
+    private static readonly float WANDER_SPEED = 1.2f;
+    private static readonly float FLEE_SPEED = 3f;
     private static readonly float WANDER_TIME = 2f;
 
     private Vector3 wanderDirection;
@@ -13,7 +14,7 @@ public class HarvestableHuman : Harvestable {
     // Update is called once per frame
     protected override void FleeingBehavior() {
         // move away from player
-        float step = SPEED * Time.deltaTime; // calculate distance to move
+        float step = FLEE_SPEED * Time.deltaTime; // calculate distance to move
         var playerPosition = PlayerController.Instance.transform.position;
         Vector2 directionToPlayer = playerPosition - this.transform.position;
         Vector2 targetDirection = -directionToPlayer;
@@ -40,7 +41,7 @@ public class HarvestableHuman : Harvestable {
             wanderDirection = Random.insideUnitSphere;
         }
 
-        this.transform.position += wanderDirection * SPEED * Time.deltaTime;
+        this.transform.position += wanderDirection * WANDER_SPEED * Time.deltaTime;
         wanderTimer += Time.deltaTime;
 
         // face direction that human is headed

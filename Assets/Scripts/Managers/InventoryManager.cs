@@ -22,7 +22,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private Collider2D[] scythedObjects = new Collider2D[1000];
     private Collider2D[] plantableSpaces = new Collider2D[100];
-    private int soulCount = 0;
+    private int soulCount = 100;
 
     // Start is called before the first frame update
     void Start()

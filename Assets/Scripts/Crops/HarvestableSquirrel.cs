@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HarvestableSquirrel : Harvestable {
-    private static readonly float SPEED = 0.7f;
+    private static readonly float WANDER_SPEED = 0.7f;
+    private static readonly float FLEE_SPEED = 1.3f;
     private static readonly float WANDER_TIME = 1f;
 
     private Vector3 wanderDirection;
@@ -12,7 +13,7 @@ public class HarvestableSquirrel : Harvestable {
     // Update is called once per frame
     protected override void FleeingBehavior() {
         // move away from player
-        float step = SPEED * Time.deltaTime; // calculate distance to move
+        float step = FLEE_SPEED * Time.deltaTime; // calculate distance to move
         var playerPosition = PlayerController.Instance.transform.position;
         Vector2 directionToPlayer = playerPosition - this.transform.position;
         Vector2 targetDirection = -directionToPlayer;
@@ -39,7 +40,7 @@ public class HarvestableSquirrel : Harvestable {
             wanderDirection = Random.insideUnitSphere;
         }
 
-        this.transform.position += wanderDirection * SPEED * Time.deltaTime;
+        this.transform.position += wanderDirection * WANDER_SPEED * Time.deltaTime;
         wanderTimer += Time.deltaTime;
 
         // face direction that squirrel is headed
