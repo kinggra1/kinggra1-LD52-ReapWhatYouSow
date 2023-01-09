@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cropData: {fileID: 11400000, guid: 486161f12ce417446b8297a52ab78632, type: 2}
+  fleeingAnimation: {fileID: 9100000, guid: dcbcd9273276f044d814c78af024b573, type: 2}
 --- !u!1 &7307237977389581118
 GameObject:
   m_ObjectHideFlags: 0

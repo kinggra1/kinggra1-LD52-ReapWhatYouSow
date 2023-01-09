@@ -58,7 +58,7 @@ public class PlayerController : Singleton<PlayerController> {
 
     public void ShowSwingScytheAnimation() {
         scytheSwingObject.SetActive(true);
-        Invoke("HideSwingScytheAnimation", 0.2f);
+        Invoke("HideSwingScytheAnimation", 0.1f);
     }
 
     private void HideSwingScytheAnimation() {

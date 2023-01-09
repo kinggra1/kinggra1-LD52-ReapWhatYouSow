@@ -10,6 +10,7 @@ public abstract class Harvestable : MonoBehaviour {
     public enum State { GROWING, RIPE, FLEEING }
     private State currentState = State.GROWING;
     public Crop cropData;
+    public RuntimeAnimatorController fleeingAnimation;
 
     private float stateTimer = 0f;
 
@@ -71,6 +72,9 @@ public abstract class Harvestable : MonoBehaviour {
                 RipeBehavior();
                 if (stateTimer > cropData.timeToFlee) {
                     SetState(State.FLEEING);
+                    if (fleeingAnimation != null) {
+                        SetFleeingAnimation();
+                    }
                 }
                 break;
             case State.FLEEING:
@@ -89,5 +93,10 @@ public abstract class Harvestable : MonoBehaviour {
     private void SetState(State state) {
         stateTimer = 0f;
         this.currentState = state;
+    }
+
+    private void SetFleeingAnimation() {
+        Animator animator = spriteRenderer.GetComponentInChildren<Animator>();
+        animator.runtimeAnimatorController = fleeingAnimation;
     }
 }
