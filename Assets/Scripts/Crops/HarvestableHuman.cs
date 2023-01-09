@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HarvestableHuman : Harvestable {
 
-    private static readonly float SPEED = 1f;
+    private static readonly float SPEED = 1.2f;
     private static readonly float WANDER_TIME = 2f;
 
     private Vector3 wanderDirection;

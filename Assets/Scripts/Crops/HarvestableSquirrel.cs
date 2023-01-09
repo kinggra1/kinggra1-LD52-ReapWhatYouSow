@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HarvestableSquirrel : Harvestable {
-    private static readonly float SPEED = 1f;
+    private static readonly float SPEED = 0.7f;
     private static readonly float WANDER_TIME = 1f;
 
     private Vector3 wanderDirection;
