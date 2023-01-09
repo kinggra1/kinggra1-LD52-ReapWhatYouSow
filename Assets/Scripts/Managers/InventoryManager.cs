@@ -31,7 +31,13 @@ public class InventoryManager : Singleton<InventoryManager>
             inventorySlot.Reset();
             inventorySlots.Add(inventorySlot);
         }
-        SetCurrentItemIndex(0); // Default to scythe, which is in the first slot hardcoded
+        SetCurrentItemIndex(6); // Default to random spot so scythe isn't out at the beginning of the tutorial
+
+        // Create starting inventory content (hacky)
+        inventorySlots[1].SetSprite(squirrelCropPrefab.GetComponent<Harvestable>().cropData.uiSeedSprite);
+        inventorySlots[1].Add(ItemType.SQUIRREL_SEED);
+        inventorySlots[1].Add(ItemType.SQUIRREL_SEED);
+        inventorySlots[1].Add(ItemType.SQUIRREL_SEED);
 
         soulCountText.text = soulCount.ToString();
     }
@@ -128,6 +134,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public bool TryPlantSeed(ItemType itemType) {
         PlantableZone closestEmptyPlantableZone = TryFindPlantableZone();
+        Debug.Log(closestEmptyPlantableZone);
         if (closestEmptyPlantableZone == null) {
             return false;
         }
@@ -201,6 +208,11 @@ public class InventoryManager : Singleton<InventoryManager>
     // Update is called once per frame
     void Update()
     {
+        // Ignore item selection during the tutorial.
+        if (GameManager.Instance.InTutorial()) {
+            return;
+        }
+
         if (Input.mouseScrollDelta.y > 0f) {
             SetCurrentItemIndex(currentItemIndex - 1);
         } else if (Input.mouseScrollDelta.y < 0f) {

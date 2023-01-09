@@ -62,6 +62,11 @@ public abstract class Harvestable : MonoBehaviour {
     }
 
     public void Update() {
+        // Pause growth and movement if tutoral screen is open.
+        if (GameManager.Instance.TutorialScreenUp()) {
+            return;
+        }
+
         stateTimer += Time.deltaTime;
 
         switch (currentState) {
@@ -74,6 +79,10 @@ public abstract class Harvestable : MonoBehaviour {
                 }
                 break;
             case State.RIPE:
+                // pause crop movement if we're in tutorial
+                if (GameManager.Instance.InTutorial()) {
+                    return;
+                }
                 RipeBehavior();
                 if (stateTimer > cropData.timeToFlee) {
                     SetState(State.FLEEING);
