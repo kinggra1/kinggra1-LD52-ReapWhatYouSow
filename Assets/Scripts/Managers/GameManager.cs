@@ -84,11 +84,15 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public bool TutorialMovementFrozen() {
-        return tutorialState < 4;
+        return tutorialState < 5;
     }
 
     public bool TutorialScreenUp() {
         return tutorialScreenOpen;
+    }
+
+    public void DelayedHideTutorialFive() {
+        Invoke("TutoralFiveGoToShopClick", 1f);
     }
 
     public void HideTutorialScreens() {

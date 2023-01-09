@@ -33,7 +33,8 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         SetCurrentItemIndex(0); // Default to scythe, which is in the first slot hardcoded
 
-        // Create starting inventory content
+        // Create starting inventory content (hacky)
+        inventorySlots[1].SetSprite(squirrelCropPrefab.GetComponent<Harvestable>().cropData.uiSeedSprite);
         inventorySlots[1].Add(ItemType.SQUIRREL_SEED);
         inventorySlots[1].Add(ItemType.SQUIRREL_SEED);
         inventorySlots[1].Add(ItemType.SQUIRREL_SEED);

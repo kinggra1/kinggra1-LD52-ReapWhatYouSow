@@ -73,6 +73,11 @@ public class PlayerController : Singleton<PlayerController> {
         xInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Vertical");
 
+        // hide the tutorial step 5 menu if we are trying to move.
+        if (GameManager.Instance.InTutorial() && !GameManager.Instance.TutorialMovementFrozen() &&  (Mathf.Abs(xInput) > 0f || Mathf.Abs(yInput) > 0f)) {
+            GameManager.Instance.DelayedHideTutorialFive();
+        }
+
         if (!attackButtonPressed && !EventSystem.current.IsPointerOverGameObject()) {
             attackButtonPressed = Input.GetMouseButtonDown(0);
         }
