@@ -85,16 +85,23 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public void SwingScythe() {
         PlayerController.Instance.ShowSwingScytheAnimation();
+        AudioManager.Instance.PlayScytheSwing();
         ContactFilter2D filter = new ContactFilter2D();
         filter.useTriggers = true;
         int numObjects = PlayerController.Instance.scytheCollider.OverlapCollider(filter, scythedObjects);
 
+        bool anyHit = false;
         for (int i = 0; i < numObjects; i++) {
             Collider2D scythedObject = scythedObjects[i];
             Harvestable harvestable = scythedObject.GetComponent<Harvestable>();
             if (harvestable && harvestable.CanHarvest()) {
                 harvestable.Harvest();
+                anyHit = true;
             }
+        }
+
+        if (anyHit) {
+            AudioManager.Instance.PlayScytheHit();
         }
     }
 
@@ -142,6 +149,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 break;
         }
 
+        AudioManager.Instance.PlayPlantingSound();
         GameObject spawnedCrop = Instantiate(seedPrefab);
         Harvestable harvestable = spawnedCrop.GetComponent<Harvestable>();
         closestEmptyPlantableZone.Plant(harvestable);
