@@ -10,8 +10,9 @@ public class Crop : ScriptableObject {
 
     // Number of souls that need to be spend to receive this Crop seed.
     public int storeCost;
-    // How many of the entity are farmed by this crop
-    public int spawnCount;
+
+    // How large we should scale up to while growing
+    public float maxGrowthScale = 1f;
 
     // How long it takes to go from planted to fully grown.
     public float growingTime;

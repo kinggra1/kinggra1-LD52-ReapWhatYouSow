@@ -3,71 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager> {
-    public AudioClip fireballCastSound;
-    public AudioClip firestormCastSound;
-    public AudioClip playerHitSound;
-    public AudioClip slimeDieSound;
-    public AudioClip batDieSound;
-    public AudioClip fishDieSound;
-    public AudioClip enemyWizardHitSound;
-    public AudioClip poofSoundEffect;
-    public AudioClip dialogueBoop;
+    public AudioClip backgroundMusic;
+
+    public AudioClip scytheSwing;
+    public AudioClip scytheHit;
+
+    public AudioClip soulCollected;
+
 
     private AudioSource playerSfxAudioSource;
-    private AudioSource fireballHitSfxAudioSource;
-    private AudioSource enemySfxAudioSource;
+    private AudioSource generalSfxAudioSource;
+    private AudioSource musicAudioSource;
 
     private void Awake() {
         playerSfxAudioSource = gameObject.AddComponent<AudioSource>();
-        fireballHitSfxAudioSource = gameObject.AddComponent<AudioSource>();
-        enemySfxAudioSource = gameObject.AddComponent<AudioSource>();
+        generalSfxAudioSource = gameObject.AddComponent<AudioSource>();
+        musicAudioSource = gameObject.AddComponent<AudioSource>();
+
+        musicAudioSource.volume = 0.2f;
+        musicAudioSource.clip = backgroundMusic;
+        musicAudioSource.loop = true;
+        musicAudioSource.Play();
     }
 
-    public void PlayFireballCast() {
+    public void PlayScytheSwing() {
         playerSfxAudioSource.volume = (Random.Range(0.6f, 1f));
         playerSfxAudioSource.pitch = (Random.Range(0.6f, 1.1f));
-        playerSfxAudioSource.PlayOneShot(fireballCastSound);
+        playerSfxAudioSource.PlayOneShot(scytheSwing);
     }
 
-    public void PlayFirestormCast() {
+    public void PlayScytheHit() {
         playerSfxAudioSource.volume = 0.7f;
         playerSfxAudioSource.pitch = (Random.Range(0.6f, 1.1f));
-        playerSfxAudioSource.PlayOneShot(firestormCastSound);
+        playerSfxAudioSource.PlayOneShot(scytheHit);
     }
 
-    public void PlayPlayerHitSound() {
-        playerSfxAudioSource.volume = .7f;
-        playerSfxAudioSource.pitch = (Random.Range(0.9f, 1.1f));
-        playerSfxAudioSource.PlayOneShot(playerHitSound);
-    }
-
-    public void PlaySlimeDeathSound() {
-        enemySfxAudioSource.volume = 0.1f;
-        enemySfxAudioSource.pitch = (Random.Range(0.9f, 1.1f));
-        enemySfxAudioSource.PlayOneShot(slimeDieSound);
-    }
-
-    public void PlayBatDeathSound() {
-        enemySfxAudioSource.volume = .3f;
-        enemySfxAudioSource.pitch = (Random.Range(0.9f, 1.1f));
-        enemySfxAudioSource.PlayOneShot(batDieSound);
-    }
-
-    public void PlayFishDeathSound() {
-        enemySfxAudioSource.volume = 0.2f;
-        enemySfxAudioSource.pitch = (Random.Range(0.9f, 1.1f));
-        enemySfxAudioSource.PlayOneShot(fishDieSound);
-    }
-
-    public void PlayEnemyWizardHitSound() {
-        enemySfxAudioSource.volume = 0.3f;
-        enemySfxAudioSource.pitch = (Random.Range(0.9f, 1.1f));
-        enemySfxAudioSource.PlayOneShot(enemyWizardHitSound);
-    }
-
-    public void PlayFireballHitEnemy() {
-        fireballHitSfxAudioSource.volume = 0.5f;
-        fireballHitSfxAudioSource.pitch = (Random.Range(0.9f, 1.1f));
-        fireballHitSfxAudioSource.PlayOneShot(poofSoundEffect);
-    }
+  
 }

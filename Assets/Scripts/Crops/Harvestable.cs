@@ -13,6 +13,8 @@ public abstract class Harvestable : MonoBehaviour {
 
     private float stateTimer = 0f;
 
+    private SpriteRenderer spriteRenderer;
+
     protected abstract void FleeingBehavior();
     protected abstract void RipeBehavior();
 
@@ -43,12 +45,14 @@ public abstract class Harvestable : MonoBehaviour {
     }
 
     private void Grow() {
-        float scaleFactor = Mathf.Lerp(0.1f, 1f, stateTimer / cropData.growingTime);
+        float scaleFactor = Mathf.Lerp(0.1f, cropData.maxGrowthScale, stateTimer / cropData.growingTime);
         this.transform.localScale = Vector3.one * scaleFactor;
     }
 
     public void Start() {
         this.transform.localScale = Vector3.one * 0.1f;
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer.sortingOrder = 1; // Lower sorting order while growing so that the crop is behind dirt patch
     }
 
     public void Update() {
@@ -59,6 +63,7 @@ public abstract class Harvestable : MonoBehaviour {
                 Grow();
                 if (stateTimer > cropData.growingTime) {
                     this.transform.localScale = Vector3.one;
+                    spriteRenderer.sortingOrder = 20; // Higher sorting order so we're now on top of dirt patches
                     SetState(State.RIPE);
                 }
                 break;

@@ -15,7 +15,7 @@ MonoBehaviour:
   type: 3
   uiSeedSprite: {fileID: 21300000, guid: 9dd6bd6c09247fc4e9dc4388637de911, type: 3}
   storeCost: 10
-  spawnCount: 1
+  maxGrowthScale: 0.5
   growingTime: 3
   timeToFlee: 5
   numSoulsDropped: 50

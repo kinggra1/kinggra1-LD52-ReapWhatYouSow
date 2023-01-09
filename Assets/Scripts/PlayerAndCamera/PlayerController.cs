@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : Singleton<PlayerController> {
 
@@ -72,7 +73,7 @@ public class PlayerController : Singleton<PlayerController> {
         xInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Vertical");
 
-        if (!attackButtonPressed) {
+        if (!attackButtonPressed && !EventSystem.current.IsPointerOverGameObject()) {
             attackButtonPressed = Input.GetMouseButtonDown(0);
         }
 
