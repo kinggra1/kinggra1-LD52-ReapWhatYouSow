@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class HarvestableMythological : Harvestable {
 
-    private static readonly float SPEED = 1f;
+    private static readonly float SPEED = 2.5f;
     private static readonly float WANDER_TIME = 2f;
 
     private Vector3 wanderDirection;
-    private float wanderTimer = 0;
+    private float wanderTimer = 2;
 
     // Update is called once per frame
     protected override void FleeingBehavior() {
