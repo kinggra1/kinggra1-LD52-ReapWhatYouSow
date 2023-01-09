@@ -43,6 +43,10 @@ public class GameManager : Singleton<GameManager> {
         if (GameOverCondition()) {
             GameOver();
         }
+
+        if (InventoryManager.Instance.CanSpendSoul(200)) {
+            WinGame();
+        }
     }
 
     public void Pause() {
@@ -68,13 +72,16 @@ public class GameManager : Singleton<GameManager> {
     }
 
     private bool GameOverCondition() {
-        if (InventoryManager.Instance.OutOfSouls()) {
-            // check if there are any live crops in the scene
-            if (GameObject.FindGameObjectsWithTag("Plantable").Length == 0) {
-                return true;
-            }
+        if (!InventoryManager.Instance.OutOfSouls()) {
+            return false;
         }
-        return false;
+        if (GameObject.FindGameObjectsWithTag("Plantable").Length != 0) {
+            return false;
+        }
+        if (GameObject.FindGameObjectsWithTag("Collectable").Length == 0) {
+            return false;
+        }
+        return true;
     }
 
     public void GameOver() {
@@ -88,9 +95,13 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void RestartLevel() {
+        Play();
         gameOver = false;
+        tutorialState = 6;
         defeatUI.SetActive(false);
+        victoryUI.SetActive(false);
         PlayerController.Instance.transform.position = Vector3.zero;
+        InventoryManager.Instance.Reset();
     }
 
     public bool InTutorial() {

@@ -78,6 +78,23 @@ public class InventoryManager : Singleton<InventoryManager>
         return false;
     }
 
+    internal void Reset() {
+        foreach (InventoryTileController inventorySlot in inventorySlotsParent.GetComponentsInChildren<InventoryTileController>()) {
+            inventorySlot.Reset();
+            inventorySlots.Add(inventorySlot);
+        }
+        SetCurrentItemIndex(0); // Default to scythe on reset
+
+        soulCount = 0;
+        // Create starting inventory content (hacky)
+        inventorySlots[1].SetSprite(squirrelCropPrefab.GetComponent<Harvestable>().cropData.uiSeedSprite);
+        inventorySlots[1].Add(ItemType.SQUIRREL_SEED);
+        inventorySlots[1].Add(ItemType.SQUIRREL_SEED);
+        inventorySlots[1].Add(ItemType.SQUIRREL_SEED);
+
+        soulCountText.text = soulCount.ToString();
+    }
+
     // Calls to this should be guarded with CanPickUp, it assumes that there will always be an eligible slot.
     public void PickUp(Crop cropSeed) {
         foreach (InventoryTileController inventorySlot in inventorySlots) {
