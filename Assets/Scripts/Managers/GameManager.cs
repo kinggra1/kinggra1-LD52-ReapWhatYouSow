@@ -8,6 +8,8 @@ public class GameManager : Singleton<GameManager> {
     public GameObject defeatUI;
     public GameObject victoryUI;
 
+    public GameObject mainMenuUi;
+
     public GameObject tutorialOneScreenSelectSeed;
     public GameObject tutorialTwoScreenPlantSeed;
     public GameObject tutorialThreeScreenSelectScythe;
@@ -41,8 +43,13 @@ public class GameManager : Singleton<GameManager> {
         }
         #endif
 
+
         if (GameOverCondition()) {
             GameOver();
+        }
+
+        if (winGame) {
+            return;
         }
 
         if (InventoryManager.Instance.CanSpendSoul(200)) {
@@ -56,6 +63,15 @@ public class GameManager : Singleton<GameManager> {
 
     public void Play() {
         paused = false;
+    }
+
+    public void EnterGameFromMenu() {
+        mainMenuUi.SetActive(false);
+    }
+
+    public void CloseVictoryScreen() {
+        victoryUI.SetActive(false);
+        Play();
     }
      
     public void RestartGame() {
@@ -79,7 +95,7 @@ public class GameManager : Singleton<GameManager> {
         if (GameObject.FindGameObjectsWithTag("Plantable").Length != 0) {
             return false;
         }
-        if (GameObject.FindGameObjectsWithTag("Collectable").Length == 0) {
+        if (GameObject.FindGameObjectsWithTag("Collectable").Length != 0) {
             return false;
         }
         return true;

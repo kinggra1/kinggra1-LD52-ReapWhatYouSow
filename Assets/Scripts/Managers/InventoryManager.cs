@@ -178,7 +178,6 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public bool TryPlantSeed(ItemType itemType) {
         PlantableZone closestEmptyPlantableZone = TryFindPlantableZone();
-        Debug.Log(closestEmptyPlantableZone);
         if (closestEmptyPlantableZone == null) {
             return false;
         }
