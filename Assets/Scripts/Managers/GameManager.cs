@@ -12,7 +12,8 @@ public class GameManager : Singleton<GameManager> {
     public GameObject tutorialTwoScreenPlantSeed;
     public GameObject tutorialThreeScreenSelectScythe;
     public GameObject tutorialFourScreenHarvestSquirrel;
-    public GameObject tutorialFiveScreenGoToShop;
+    public GameObject tutorialFiveSoulTip;
+    public GameObject tutorialSixScreenGoToShop;
 
     private bool paused = false;
     private bool gameOver = false;
@@ -105,11 +106,11 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public bool InTutorial() {
-        return tutorialState <= 5;
+        return tutorialState <= 6;
     }
 
     public bool TutorialMovementFrozen() {
-        return tutorialState < 5;
+        return tutorialState < 6;
     }
 
     public bool TutorialScreenUp() {
@@ -117,7 +118,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void DelayedHideTutorialFive() {
-        Invoke("TutoralFiveGoToShopClick", 0.6f);
+        Invoke("TutoralSixGoToShopClick", 0.6f);
     }
 
     public void HideTutorialScreens() {
@@ -125,7 +126,8 @@ public class GameManager : Singleton<GameManager> {
         tutorialTwoScreenPlantSeed.SetActive(false);
         tutorialThreeScreenSelectScythe.SetActive(false);
         tutorialFourScreenHarvestSquirrel.SetActive(false);
-        tutorialFiveScreenGoToShop.SetActive(false);
+        tutorialFiveSoulTip.SetActive(false);
+        tutorialSixScreenGoToShop.SetActive(false);
     }
 
     public void ShowTutorialOneSelectSeed() {
@@ -177,19 +179,31 @@ public class GameManager : Singleton<GameManager> {
         InventoryManager.Instance.TryUseCurrentItem();
         HideTutorialScreens();
         tutorialScreenOpen = false;
-        Invoke("ShowTutorialFiveGoToShop", 1f);
+        Invoke("ShowTutorialFiveSoulTip", 1f);
     }
 
-    public void ShowTutorialFiveGoToShop() {
-        tutorialFiveScreenGoToShop.SetActive(true);
+    public void ShowTutorialFiveSoulTip() {
+        tutorialFiveSoulTip.SetActive(true);
         tutorialState = 5;
         tutorialScreenOpen = true;
     }
 
-    public void TutoralFiveGoToShopClick() {
+    public void TutorialFiveSoulTipClick() {
         HideTutorialScreens();
         tutorialScreenOpen = false;
+        ShowTutorialSixGoToShop();
+    }
+
+    public void ShowTutorialSixGoToShop() {
+        tutorialSixScreenGoToShop.SetActive(true);
         tutorialState = 6;
+        tutorialScreenOpen = true;
+    }
+
+    public void TutoralSixGoToShopClick() {
+        HideTutorialScreens();
+        tutorialScreenOpen = false;
+        tutorialState = 7;
     }
 
     public bool IsPaused() {
