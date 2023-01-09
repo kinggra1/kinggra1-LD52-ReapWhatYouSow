@@ -10,6 +10,8 @@ public class HarvestableMythological : Harvestable {
     private Vector3 wanderDirection;
     private float wanderTimer = 2;
 
+    public GameObject mythologicalPlantableZone;
+
     // Update is called once per frame
     protected override void FleeingBehavior() {
         // move away from player
@@ -69,5 +71,11 @@ public class HarvestableMythological : Harvestable {
             collectable.DelayCollectable(SOUL_ANIMATION_TIME);
         }
         base.SetState(State.GROWING);
+        this.transform.localScale = Vector3.one * 0.1f;
+        SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer.sortingOrder = 1; // Lower sorting order while growing so that the crop is behind dirt patch
+        Vector3 plantableZonePosition = this.gameObject.transform.position;
+        plantableZonePosition.y = plantableZonePosition.y - .25f;
+        Instantiate(mythologicalPlantableZone, plantableZonePosition, Quaternion.identity);
     }
 }
