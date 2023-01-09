@@ -24,6 +24,9 @@ public class HarvestableSquirrel : Harvestable {
         Vector3 localScale = this.transform.localScale;
         localScale.x = targetDirection.x < 0 ? 1 : -1;
         this.transform.localScale = localScale;
+
+        // check if crop is offscreen and delete if so
+        base.RemoveIfOutOfBounds();
     }
 
     // RipeBehavior makes squirrel wander until it flees
