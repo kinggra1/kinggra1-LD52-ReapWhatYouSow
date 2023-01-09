@@ -5257,7 +5257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: -5, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16569,6 +16569,7 @@ MonoBehaviour:
   scytheSwing: {fileID: 8300000, guid: 330a75a196d3bf24c9b652b8e823239e, type: 3}
   scytheHit: {fileID: 8300000, guid: d6ad63a4558764c4b941ae7d94d1cff6, type: 3}
   soulCollected: {fileID: 8300000, guid: d00568d8e542d824989f6f284f04b88a, type: 3}
+  plantingSound: {fileID: 8300000, guid: 6b1dfa070966a1b4788fe62c3c9fcae8, type: 3}
 --- !u!1001 &1589126581
 PrefabInstance:
   m_ObjectHideFlags: 0

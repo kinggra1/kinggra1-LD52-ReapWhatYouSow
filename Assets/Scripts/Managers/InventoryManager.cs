@@ -149,6 +149,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 break;
         }
 
+        AudioManager.Instance.PlayPlantingSound();
         GameObject spawnedCrop = Instantiate(seedPrefab);
         Harvestable harvestable = spawnedCrop.GetComponent<Harvestable>();
         closestEmptyPlantableZone.Plant(harvestable);
