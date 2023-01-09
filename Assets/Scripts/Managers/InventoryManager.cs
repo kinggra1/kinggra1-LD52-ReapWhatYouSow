@@ -162,7 +162,7 @@ public class InventoryManager : Singleton<InventoryManager>
         soulCountText.text = soulCount.ToString();
     }
 
-    private void SetCurrentItemIndex(int index) {
+    public void SetCurrentItemIndex(int index) {
         inventorySlots[currentItemIndex].UnhighlightItem();
 
         if (index < 0) {
