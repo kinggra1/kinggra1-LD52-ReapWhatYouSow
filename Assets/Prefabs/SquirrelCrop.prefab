@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 984339587}
   m_Layer: 0
   m_Name: SquirrelCrop
-  m_TagString: Untagged
+  m_TagString: Plantable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cropData: {fileID: 11400000, guid: c55a178ee806de34d8c6fc7068cf280f, type: 2}
+  fleeingAnimation: {fileID: 0}
 --- !u!61 &984339587
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6631479882202836382}
   m_Layer: 0
   m_Name: HumanCrop
-  m_TagString: Untagged
+  m_TagString: Plantable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

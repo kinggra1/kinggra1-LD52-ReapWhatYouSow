@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class InventoryManager : Singleton<InventoryManager>
 {
     public enum ItemType { UNKNOWN, SCYTHE, SQUIRREL_SEED, HUMAN_SEED, MYTHOLOGICAL_SEED }
+
+    private static float TIME_BETWEEN_SOULS_EXPIRED = 3f;
 
     public GameObject squirrelCropPrefab;
     public GameObject humanCropPrefab;
@@ -22,7 +25,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private Collider2D[] scythedObjects = new Collider2D[1000];
     private Collider2D[] plantableSpaces = new Collider2D[100];
-    private int soulCount = 100;
+    private int soulCount = 5;
+
+    private float soulExpireTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +45,28 @@ public class InventoryManager : Singleton<InventoryManager>
         inventorySlots[1].Add(ItemType.SQUIRREL_SEED);
 
         soulCountText.text = soulCount.ToString();
+    }
+
+    internal bool OutOfSouls() {
+        if (soulCount > 0) {
+            return false;
+        }
+
+        foreach (InventoryTileController inventorySlot in inventorySlots) {
+            switch (inventorySlot.itemType) {
+                case ItemType.UNKNOWN:
+                    break;
+                case ItemType.SCYTHE:
+                    break;
+                case ItemType.SQUIRREL_SEED:
+                    return false;
+                case ItemType.HUMAN_SEED:
+                    return false;
+                case ItemType.MYTHOLOGICAL_SEED:
+                    return false;
+            }
+        }
+        return true;
     }
 
     public bool CanPickUp(Crop cropSeed) {
@@ -211,6 +238,12 @@ public class InventoryManager : Singleton<InventoryManager>
         // Ignore item selection during the tutorial.
         if (GameManager.Instance.InTutorial()) {
             return;
+        }
+
+        soulExpireTimer += Time.deltaTime;
+        if (soulExpireTimer > TIME_BETWEEN_SOULS_EXPIRED) {
+            soulExpireTimer = 0f;
+            SpendSoul(1);
         }
 
         if (Input.mouseScrollDelta.y > 0f) {

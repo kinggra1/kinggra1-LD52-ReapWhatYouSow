@@ -39,6 +39,10 @@ public class GameManager : Singleton<GameManager> {
             Application.Quit();
         }
         #endif
+
+        if (GameOverCondition()) {
+            GameOver();
+        }
     }
 
     public void Pause() {
@@ -57,16 +61,26 @@ public class GameManager : Singleton<GameManager> {
     public void WinGame() {
         winGame = true;
         Pause();
-        foreach (GameObject crop in GameObject.FindGameObjectsWithTag("Crop")) {
+        foreach (GameObject crop in GameObject.FindGameObjectsWithTag("Plantable")) {
             Destroy(crop);
         }
         victoryUI.SetActive(true);
     }
 
+    private bool GameOverCondition() {
+        if (InventoryManager.Instance.OutOfSouls()) {
+            // check if there are any live crops in the scene
+            if (GameObject.FindGameObjectsWithTag("Plantable").Length == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void GameOver() {
         gameOver = true;
         Pause();
-        foreach (GameObject crop in GameObject.FindGameObjectsWithTag("Crop")) {
+        foreach (GameObject crop in GameObject.FindGameObjectsWithTag("Plantable")) {
             Destroy(crop);
         }
 
