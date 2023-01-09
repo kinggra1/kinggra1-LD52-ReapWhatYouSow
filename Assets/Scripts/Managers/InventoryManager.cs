@@ -122,7 +122,7 @@ public class InventoryManager : Singleton<InventoryManager>
     }
 
     public bool CanSpendSoul(int amount) {
-        return this.soulCount > amount;
+        return this.soulCount >= amount;
     }
 
     public void SpendSoul(int amount) {

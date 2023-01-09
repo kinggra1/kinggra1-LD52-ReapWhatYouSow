@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   uiSeedSprite: {fileID: 21300000, guid: bd4fabf381fba2b4da582f94a6bbe5c6, type: 3}
-  storeCost: 3
+  storeCost: 5
   spawnCount: 3
   growingTime: 5
-  timeToFlee: 10
+  timeToFlee: 4
   numSoulsDropped: 8
