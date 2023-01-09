@@ -48,4 +48,26 @@ public class HarvestableMythological : Harvestable {
         localScale.x = wanderDirection.x < 0 ? 1 : -1;
         this.transform.localScale = localScale;
     }
+
+    public override void Harvest() {
+        for (int i = 0; i < cropData.numSoulsDropped; i++) {
+            GameObject soul = Instantiate(FarmingManager.Instance.soulOnePrefab);
+            Collectable collectable = soul.GetComponent<Collectable>();
+            soul.transform.position = this.transform.position;
+            float randomDelay = Random.Range(0f, 0.1f);
+            Vector3 offset = Random.insideUnitCircle;
+            Vector3 targetPos = this.transform.position + offset;
+            LeanTween.moveX(soul, targetPos.x, SOUL_ANIMATION_TIME);
+
+            LeanTween.moveY(soul, targetPos.y + ARC_MAX_Y, SOUL_ANIMATION_TIME / 2f)
+                .setDelay(randomDelay)
+                .setEaseOutCubic()
+                .setOnComplete(
+                    () => LeanTween.moveY(soul, targetPos.y, SOUL_ANIMATION_TIME / 2f)
+                    .setEaseInCubic());
+
+            collectable.DelayCollectable(SOUL_ANIMATION_TIME);
+        }
+        base.SetState(State.GROWING);
+    }
 }

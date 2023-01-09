@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class Harvestable : MonoBehaviour {
 
-    private static readonly float SOUL_ANIMATION_TIME = 0.5f;
-    private static readonly float ARC_MAX_Y = 1f;
+    protected static readonly float SOUL_ANIMATION_TIME = 0.5f;
+    protected static readonly float ARC_MAX_Y = 1f;
 
     public enum State { GROWING, RIPE, FLEEING }
     private State currentState = State.GROWING;
@@ -24,7 +24,7 @@ public abstract class Harvestable : MonoBehaviour {
     protected abstract void FleeingBehavior();
     protected abstract void RipeBehavior();
 
-    public void Harvest() {
+    public virtual void Harvest() {
         for (int i = 0; i < cropData.numSoulsDropped; i++) {
             GameObject soul = Instantiate(FarmingManager.Instance.soulOnePrefab);
             Collectable collectable = soul.GetComponent<Collectable>();
@@ -104,7 +104,7 @@ public abstract class Harvestable : MonoBehaviour {
         return false;
     }
 
-    private void SetState(State state) {
+    protected void SetState(State state) {
         stateTimer = 0f;
         this.currentState = state;
     }
