@@ -9,7 +9,13 @@ public class ShopManager : Singleton<ShopManager>
 
     public GameObject shopUI;
 
+    private List<ShopItemController> shopItems = new List<ShopItemController>();
+
     private void Start() {
+        foreach (ShopItemController shopItem in shopUI.GetComponentsInChildren<ShopItemController>()) {
+            shopItem.RefreshGUI();
+            shopItems.Add(shopItem);
+        }
         shopUI.SetActive(false);
     }
 
@@ -23,14 +29,22 @@ public class ShopManager : Singleton<ShopManager>
         shopUI.SetActive(false);
     }
 
+    public void RefreshShopUI() {
+        foreach (ShopItemController shopItem in shopItems) {
+            shopItem.RefreshGUI();
+        }
+    }
+
     // We've already committed to purchase here, any "CanPackUp" gating should block the UI element itself?
     public void BuySquirrelSeed() {
         InventoryManager.Instance.SpendSoul(squirrelSeedData.storeCost);
         InventoryManager.Instance.PickUp(squirrelSeedData);
+        RefreshShopUI();
     }
 
     public void BuyHumanSeed() {
         InventoryManager.Instance.SpendSoul(humanSeedData.storeCost);
         InventoryManager.Instance.PickUp(humanSeedData);
+        RefreshShopUI();
     }
 }
