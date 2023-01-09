@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: CropSquirrel
   m_EditorClassIdentifier: 
   type: 2
-  uiSeedSprite: {fileID: 21300000, guid: bd4fabf381fba2b4da582f94a6bbe5c6, type: 3}
+  uiSeedSprite: {fileID: 21300000, guid: c01f6d052211cb248923c7bb1270abb2, type: 3}
   storeCost: 1
-  spawnCount: 1
+  maxGrowthScale: 1
   growingTime: 3
   timeToFlee: 5
   numSoulsDropped: 2

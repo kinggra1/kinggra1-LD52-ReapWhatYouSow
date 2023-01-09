@@ -28,7 +28,7 @@ public class AudioManager : Singleton<AudioManager> {
     }
 
     public void PlaySoulCollected() {
-        generalSfxAudioSource.volume = (Random.Range(0.05f, 0.1f));
+        generalSfxAudioSource.volume = (Random.Range(0.05f, 0.08f));
         generalSfxAudioSource.pitch = (Random.Range(0.8f, 1f));
         generalSfxAudioSource.PlayOneShot(soulCollected);
     }
