@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CropHuman
   m_EditorClassIdentifier: 
   type: 3
-  uiSeedSprite: {fileID: 21300000, guid: 9dd6bd6c09247fc4e9dc4388637de911, type: 3}
+  uiSeedSprite: {fileID: 21300000, guid: 51f12d1d16817ab4586ceb03a8b1632a, type: 3}
   storeCost: 10
   maxGrowthScale: 0.5
   growingTime: 15
