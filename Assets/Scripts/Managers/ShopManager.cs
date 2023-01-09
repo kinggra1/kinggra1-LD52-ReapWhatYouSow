@@ -35,6 +35,12 @@ public class ShopManager : Singleton<ShopManager>
         }
     }
 
+    public void BuySeed(Crop seedData) {
+        InventoryManager.Instance.SpendSoul(seedData.storeCost);
+        InventoryManager.Instance.PickUp(seedData);
+        RefreshShopUI();
+    }
+
     // We've already committed to purchase here, any "CanPackUp" gating should block the UI element itself?
     public void BuySquirrelSeed() {
         InventoryManager.Instance.SpendSoul(squirrelSeedData.storeCost);

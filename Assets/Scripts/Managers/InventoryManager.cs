@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class InventoryManager : Singleton<InventoryManager>
 {
-    public enum ItemType { UNKNOWN, SCYTHE, SQUIRREL_SEED, HUMAN_SEED}
+    public enum ItemType { UNKNOWN, SCYTHE, SQUIRREL_SEED, HUMAN_SEED, MYTHOLOGICAL_SEED }
 
     public GameObject squirrelCropPrefab;
     public GameObject humanCropPrefab;
+    public GameObject mythologicalCropPrefab;
 
     private static readonly int MAX_SLOTS = 7;
 
@@ -20,6 +21,7 @@ public class InventoryManager : Singleton<InventoryManager>
     private int currentItemIndex;
 
     private Collider2D[] scythedObjects = new Collider2D[1000];
+    private Collider2D[] plantableSpaces = new Collider2D[100];
     private int soulCount = 0;
 
     // Start is called before the first frame update
@@ -69,6 +71,14 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
                 break;
             case ItemType.HUMAN_SEED:
+                if (TryPlantSeed(selectedSlot.itemType)) {
+                    selectedSlot.Decrement();
+                }
+                break;
+            case ItemType.MYTHOLOGICAL_SEED:
+                if (TryPlantSeed(selectedSlot.itemType)) {
+                    selectedSlot.Decrement();
+                }
                 break;
         }
     }
@@ -88,12 +98,30 @@ public class InventoryManager : Singleton<InventoryManager>
         }
     }
 
-    public bool CanPlantSeedHere() {
-        return true;
+    public PlantableZone TryFindPlantableZone() {
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.useTriggers = true;
+        int numObjects = PlayerController.Instance.plantableColliderSpace.OverlapCollider(filter, plantableSpaces);
+
+        PlantableZone closestEmptyZone = null;
+        float minDistance = Mathf.Infinity;
+        for (int i = 0; i < numObjects; i++) {
+            Collider2D plantableZoneCollider = plantableSpaces[i];
+            PlantableZone plantableZone = plantableZoneCollider.GetComponent<PlantableZone>();
+            if (plantableZone && plantableZone.IsEmpty()) {
+                float distance = Vector2.Distance(PlayerController.Instance.plantableColliderSpace.gameObject.transform.position, plantableZone.gameObject.transform.position);
+                if (distance < minDistance) {
+                    closestEmptyZone = plantableZone;
+                    minDistance = distance;
+                }
+            }
+        }
+        return closestEmptyZone;
     }
 
     public bool TryPlantSeed(ItemType itemType) {
-        if (!CanPlantSeedHere()) {
+        PlantableZone closestEmptyPlantableZone = TryFindPlantableZone();
+        if (closestEmptyPlantableZone == null) {
             return false;
         }
 
@@ -107,12 +135,16 @@ public class InventoryManager : Singleton<InventoryManager>
                 seedPrefab = squirrelCropPrefab;
                 break;
             case ItemType.HUMAN_SEED:
+                seedPrefab = humanCropPrefab;
+                break;
+            case ItemType.MYTHOLOGICAL_SEED:
+                seedPrefab = mythologicalCropPrefab;
                 break;
         }
 
         GameObject spawnedCrop = Instantiate(seedPrefab);
-        spawnedCrop.transform.position = PlayerController.Instance.transform.position;
-
+        Harvestable harvestable = spawnedCrop.GetComponent<Harvestable>();
+        closestEmptyPlantableZone.Plant(harvestable);
         return true;
     }
 

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c7a26aa9d27c7945b6d1495109a1705, type: 3}
-  m_Name: CropSquirrel
+  m_Name: CropMythological
   m_EditorClassIdentifier: 
-  type: 2
-  uiSeedSprite: {fileID: 21300000, guid: bd4fabf381fba2b4da582f94a6bbe5c6, type: 3}
-  storeCost: 1
+  type: 4
+  uiSeedSprite: {fileID: 21300000, guid: 06634868dd7f074449391440c3e15f3c, type: 3}
+  storeCost: 100
   spawnCount: 1
-  growingTime: 10
+  growingTime: 45
   timeToFlee: 5
-  numSoulsDropped: 2
+  numSoulsDropped: 200

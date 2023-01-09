@@ -38,6 +38,10 @@ public abstract class Harvestable : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
+    public bool IsGrowing() {
+        return currentState == State.GROWING;
+    }
+
     private void Grow() {
         float scaleFactor = Mathf.Lerp(0.1f, 1f, stateTimer / cropData.growingTime);
         this.transform.localScale = Vector3.one * scaleFactor;
@@ -71,7 +75,7 @@ public abstract class Harvestable : MonoBehaviour {
     }
 
     public bool CanHarvest() {
-        if (this.currentState != State.GROWING) {
+        if (!IsGrowing()) {
             return true;
         }
         return false;
