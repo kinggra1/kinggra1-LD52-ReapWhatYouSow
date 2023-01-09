@@ -12,7 +12,8 @@ public class GameManager : Singleton<GameManager> {
     public GameObject tutorialTwoScreenPlantSeed;
     public GameObject tutorialThreeScreenSelectScythe;
     public GameObject tutorialFourScreenHarvestSquirrel;
-    public GameObject tutorialFiveScreenGoToShop;
+    public GameObject tutorialFiveSoulTip;
+    public GameObject tutorialSixScreenGoToShop;
 
     private bool paused = false;
     private bool gameOver = false;
@@ -39,6 +40,14 @@ public class GameManager : Singleton<GameManager> {
             Application.Quit();
         }
         #endif
+
+        if (GameOverCondition()) {
+            GameOver();
+        }
+
+        if (InventoryManager.Instance.CanSpendSoul(200)) {
+            WinGame();
+        }
     }
 
     public void Pause() {
@@ -57,16 +66,29 @@ public class GameManager : Singleton<GameManager> {
     public void WinGame() {
         winGame = true;
         Pause();
-        foreach (GameObject crop in GameObject.FindGameObjectsWithTag("Crop")) {
+        foreach (GameObject crop in GameObject.FindGameObjectsWithTag("Plantable")) {
             Destroy(crop);
         }
         victoryUI.SetActive(true);
     }
 
+    private bool GameOverCondition() {
+        if (!InventoryManager.Instance.OutOfSouls()) {
+            return false;
+        }
+        if (GameObject.FindGameObjectsWithTag("Plantable").Length != 0) {
+            return false;
+        }
+        if (GameObject.FindGameObjectsWithTag("Collectable").Length == 0) {
+            return false;
+        }
+        return true;
+    }
+
     public void GameOver() {
         gameOver = true;
         Pause();
-        foreach (GameObject crop in GameObject.FindGameObjectsWithTag("Crop")) {
+        foreach (GameObject crop in GameObject.FindGameObjectsWithTag("Plantable")) {
             Destroy(crop);
         }
 
@@ -74,17 +96,21 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void RestartLevel() {
+        Play();
         gameOver = false;
+        tutorialState = 6;
         defeatUI.SetActive(false);
+        victoryUI.SetActive(false);
         PlayerController.Instance.transform.position = Vector3.zero;
+        InventoryManager.Instance.Reset();
     }
 
     public bool InTutorial() {
-        return tutorialState <= 5;
+        return tutorialState <= 6;
     }
 
     public bool TutorialMovementFrozen() {
-        return tutorialState < 5;
+        return tutorialState < 6;
     }
 
     public bool TutorialScreenUp() {
@@ -92,7 +118,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void DelayedHideTutorialFive() {
-        Invoke("TutoralFiveGoToShopClick", 0.6f);
+        Invoke("TutoralSixGoToShopClick", 0.6f);
     }
 
     public void HideTutorialScreens() {
@@ -100,7 +126,8 @@ public class GameManager : Singleton<GameManager> {
         tutorialTwoScreenPlantSeed.SetActive(false);
         tutorialThreeScreenSelectScythe.SetActive(false);
         tutorialFourScreenHarvestSquirrel.SetActive(false);
-        tutorialFiveScreenGoToShop.SetActive(false);
+        tutorialFiveSoulTip.SetActive(false);
+        tutorialSixScreenGoToShop.SetActive(false);
     }
 
     public void ShowTutorialOneSelectSeed() {
@@ -152,19 +179,31 @@ public class GameManager : Singleton<GameManager> {
         InventoryManager.Instance.TryUseCurrentItem();
         HideTutorialScreens();
         tutorialScreenOpen = false;
-        Invoke("ShowTutorialFiveGoToShop", 1f);
+        Invoke("ShowTutorialFiveSoulTip", 1f);
     }
 
-    public void ShowTutorialFiveGoToShop() {
-        tutorialFiveScreenGoToShop.SetActive(true);
+    public void ShowTutorialFiveSoulTip() {
+        tutorialFiveSoulTip.SetActive(true);
         tutorialState = 5;
         tutorialScreenOpen = true;
     }
 
-    public void TutoralFiveGoToShopClick() {
+    public void TutorialFiveSoulTipClick() {
         HideTutorialScreens();
         tutorialScreenOpen = false;
+        ShowTutorialSixGoToShop();
+    }
+
+    public void ShowTutorialSixGoToShop() {
+        tutorialSixScreenGoToShop.SetActive(true);
         tutorialState = 6;
+        tutorialScreenOpen = true;
+    }
+
+    public void TutoralSixGoToShopClick() {
+        HideTutorialScreens();
+        tutorialScreenOpen = false;
+        tutorialState = 7;
     }
 
     public bool IsPaused() {
