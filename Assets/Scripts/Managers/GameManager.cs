@@ -126,7 +126,7 @@ public class GameManager : Singleton<GameManager> {
         InventoryManager.Instance.TryUseCurrentItem();
         HideTutorialScreens();
         tutorialScreenOpen = false;
-        Invoke("ShowTutorialThreeSelectScythe", 3f);
+        Invoke("ShowTutorialThreeSelectScythe", 3.2f);
     }
 
     public void ShowTutorialThreeSelectScythe() {

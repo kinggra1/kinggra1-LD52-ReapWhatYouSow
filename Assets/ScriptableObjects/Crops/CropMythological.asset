@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: CropMythological
   m_EditorClassIdentifier: 
   type: 4
-  uiSeedSprite: {fileID: 21300000, guid: 06634868dd7f074449391440c3e15f3c, type: 3}
+  uiSeedSprite: {fileID: 21300000, guid: 52878f6f0ba376542baf3ad82ca0312a, type: 3}
   storeCost: 100
-  spawnCount: 1
+  maxGrowthScale: 1
   growingTime: 3
   timeToFlee: 5
   numSoulsDropped: 200
