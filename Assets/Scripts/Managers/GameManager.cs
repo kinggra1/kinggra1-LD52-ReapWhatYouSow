@@ -92,7 +92,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void DelayedHideTutorialFive() {
-        Invoke("TutoralFiveGoToShopClick", 1f);
+        Invoke("TutoralFiveGoToShopClick", 0.6f);
     }
 
     public void HideTutorialScreens() {
@@ -126,7 +126,7 @@ public class GameManager : Singleton<GameManager> {
         InventoryManager.Instance.TryUseCurrentItem();
         HideTutorialScreens();
         tutorialScreenOpen = false;
-        Invoke("ShowTutorialThreeSelectScythe", 5f);
+        Invoke("ShowTutorialThreeSelectScythe", 3f);
     }
 
     public void ShowTutorialThreeSelectScythe() {

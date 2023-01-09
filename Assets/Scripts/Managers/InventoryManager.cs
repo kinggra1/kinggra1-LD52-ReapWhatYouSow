@@ -31,7 +31,7 @@ public class InventoryManager : Singleton<InventoryManager>
             inventorySlot.Reset();
             inventorySlots.Add(inventorySlot);
         }
-        SetCurrentItemIndex(0); // Default to scythe, which is in the first slot hardcoded
+        SetCurrentItemIndex(6); // Default to random spot so scythe isn't out at the beginning of the tutorial
 
         // Create starting inventory content (hacky)
         inventorySlots[1].SetSprite(squirrelCropPrefab.GetComponent<Harvestable>().cropData.uiSeedSprite);
