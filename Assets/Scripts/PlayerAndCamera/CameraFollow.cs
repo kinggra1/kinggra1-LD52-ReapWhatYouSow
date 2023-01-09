@@ -19,7 +19,7 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 playerPos = PlayerController.Instance.transform.position;
+        Vector2 playerPos = PlayerController.Instance.transform.position + Vector3.down * 1f;
 
         if (Vector2.Distance(playerPos, this.transform.position) > CAMERA_FREEZE_RADIUS) {
             // Target position is at the edge of the camera freeze radius to avoid jerky lerping

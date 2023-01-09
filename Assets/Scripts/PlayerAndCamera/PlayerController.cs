@@ -9,10 +9,10 @@ public class PlayerController : Singleton<PlayerController> {
     private static readonly float MAX_OVERALL_MOVE_SPEED = 5f;
     private static readonly float MAX_IFRAMES = 1f;
 
-    private static readonly float MIN_X_POS = -14.5f;
-    private static readonly float MAX_X_POS = 14.5f;
-    private static readonly float MIN_Y_POS = -7f;
-    private static readonly float MAX_Y_POS = 7f;
+    private static readonly float MIN_X_POS = -13.5f;
+    private static readonly float MAX_X_POS = 13.5f;
+    private static readonly float MIN_Y_POS = -7.5f;
+    private static readonly float MAX_Y_POS = 7.5f;
 
     private static readonly float MAX_AIM_VARIANCE = 35f; // Degrees to either side of aimed point.
 

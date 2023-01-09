@@ -13,10 +13,11 @@ public class GameManager : Singleton<GameManager> {
     private bool winGame = false;
 
     void Start() {
-        defeatUI.SetActive(false);
-        victoryUI.SetActive(false);
-
         LeanTween.init(10000);
+
+        // defeatUI.SetActive(false);
+        // victoryUI.SetActive(false);
+
     }
 
     // Update is called once per frame
