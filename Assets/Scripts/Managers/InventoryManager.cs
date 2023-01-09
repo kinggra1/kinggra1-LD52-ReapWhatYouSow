@@ -33,6 +33,11 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         SetCurrentItemIndex(0); // Default to scythe, which is in the first slot hardcoded
 
+        // Create starting inventory content
+        inventorySlots[1].Add(ItemType.SQUIRREL_SEED);
+        inventorySlots[1].Add(ItemType.SQUIRREL_SEED);
+        inventorySlots[1].Add(ItemType.SQUIRREL_SEED);
+
         soulCountText.text = soulCount.ToString();
     }
 
@@ -201,6 +206,11 @@ public class InventoryManager : Singleton<InventoryManager>
     // Update is called once per frame
     void Update()
     {
+        // Ignore item selection during the tutorial.
+        if (GameManager.Instance.InTutorial()) {
+            return;
+        }
+
         if (Input.mouseScrollDelta.y > 0f) {
             SetCurrentItemIndex(currentItemIndex - 1);
         } else if (Input.mouseScrollDelta.y < 0f) {

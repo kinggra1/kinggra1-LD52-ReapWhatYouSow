@@ -100,6 +100,10 @@ public class PlayerController : Singleton<PlayerController> {
             }
         }
 
+        if (GameManager.Instance.TutorialMovementFrozen()) {
+            return;
+        }
+
         Vector3 inputPositionChange = 
             xInput * MAX_X_MOVE_SPEED * Vector3.right 
             + yInput * MAX_Y_MOVE_SPEED * Vector3.up;
