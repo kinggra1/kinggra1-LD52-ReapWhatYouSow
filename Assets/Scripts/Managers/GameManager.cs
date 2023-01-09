@@ -52,7 +52,7 @@ public class GameManager : Singleton<GameManager> {
             return;
         }
 
-        if (InventoryManager.Instance.CanSpendSoul(200)) {
+        if (InventoryManager.Instance.CanSpendSoul(20)) {
             WinGame();
         }
     }
@@ -114,9 +114,11 @@ public class GameManager : Singleton<GameManager> {
     public void RestartLevel() {
         Play();
         gameOver = false;
+        winGame = false;
         tutorialState = 6;
         defeatUI.SetActive(false);
         victoryUI.SetActive(false);
+        HideTutorialScreens();
         PlayerController.Instance.transform.position = Vector3.zero;
         InventoryManager.Instance.Reset();
     }
