@@ -20,6 +20,14 @@ public class HarvestableMythological : Harvestable {
         Vector3 targetPosition = Vector2.MoveTowards(this.transform.position, (Vector2)this.transform.position + targetDirection, step);
         targetPosition.z = this.transform.position.z;
         this.transform.position = targetPosition;
+
+        // face direction that phoenix is headed
+        Vector3 localScale = this.transform.localScale;
+        localScale.x = targetDirection.x < 0 ? 1 : -1;
+        this.transform.localScale = localScale;
+
+        // check if crop is offscreen and delete if so
+        base.RemoveIfOutOfBounds();
     }
 
     // RipeBehavior makes human wander until it flees
@@ -34,5 +42,10 @@ public class HarvestableMythological : Harvestable {
 
         this.transform.position += wanderDirection * SPEED * Time.deltaTime;
         wanderTimer += Time.deltaTime;
+
+        // face direction that phoenix is headed
+        Vector3 localScale = this.transform.localScale;
+        localScale.x = wanderDirection.x < 0 ? 1 : -1;
+        this.transform.localScale = localScale;
     }
 }
