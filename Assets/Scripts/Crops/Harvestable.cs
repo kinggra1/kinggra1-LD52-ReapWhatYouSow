@@ -12,6 +12,11 @@ public abstract class Harvestable : MonoBehaviour {
     public Crop cropData;
     public RuntimeAnimatorController fleeingAnimation;
 
+    private static readonly float SCREEN_MIN_X = -17;
+    private static readonly float SCREEN_MAX_X = 17;
+    private static readonly float SCREEN_MIN_Y = -11;
+    private static readonly float SCREEN_MAX_Y = 11;
+
     private float stateTimer = 0f;
 
     private SpriteRenderer spriteRenderer;
@@ -98,5 +103,12 @@ public abstract class Harvestable : MonoBehaviour {
     private void SetFleeingAnimation() {
         Animator animator = spriteRenderer.GetComponentInChildren<Animator>();
         animator.runtimeAnimatorController = fleeingAnimation;
+    }
+
+    protected void RemoveIfOutOfBounds() {
+        bool outOfBounds = this.transform.position.x < SCREEN_MIN_X || this.transform.position.x > SCREEN_MAX_X || this.transform.position.y < SCREEN_MIN_Y || this.transform.position.y > SCREEN_MAX_Y;
+        if (outOfBounds) {
+            Destroy(this.gameObject);
+        }
     }
 }
