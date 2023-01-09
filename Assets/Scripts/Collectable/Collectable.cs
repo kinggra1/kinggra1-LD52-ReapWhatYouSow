@@ -30,7 +30,8 @@ public abstract class Collectable : MonoBehaviour {
     private void CollectAnimation() {
         triggered = true;
         GameObject player = PlayerController.Instance.gameObject;
-        LeanTween.move(this.gameObject, player.transform.position, COLLECT_ANIMATION_TIME).setEaseInQuad();
-        Invoke("CustomBehavior", COLLECT_ANIMATION_TIME);
+        float delay = Random.Range(0f, 0.1f);
+        LeanTween.move(this.gameObject, player.transform.position, COLLECT_ANIMATION_TIME).setDelay(delay).setEaseInQuad();
+        Invoke("CustomBehavior", COLLECT_ANIMATION_TIME + delay);
     }
 }
