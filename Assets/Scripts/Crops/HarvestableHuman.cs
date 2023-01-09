@@ -5,6 +5,10 @@ using UnityEngine;
 public class HarvestableHuman : Harvestable {
 
     private static readonly float SPEED = 1f;
+    private static readonly float WANDER_TIME = 2f;
+
+    private Vector3 wanderDirection;
+    private float wanderTimer = 0;
 
     // Update is called once per frame
     protected override void FleeingBehavior() {
@@ -18,7 +22,17 @@ public class HarvestableHuman : Harvestable {
         this.transform.position = targetPosition;
     }
 
+    // RipeBehavior makes human wander until it flees
+    // choose a random direction and have it go that way for a set amount of time
+    // then switch to a new random direction
     protected override void RipeBehavior() {
-        this.transform.position += Vector3.right * (SPEED/2f) * Time.deltaTime;
+        // check to see if it's time to switch directions
+        if (wanderTimer >= WANDER_TIME) {
+            wanderTimer = 0;
+            wanderDirection = Random.insideUnitSphere;
+        }
+
+        this.transform.position += wanderDirection * SPEED * Time.deltaTime;
+        wanderTimer += Time.deltaTime;
     }
 }
