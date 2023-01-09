@@ -16,6 +16,7 @@ public class PlayerController : Singleton<PlayerController> {
 
     private static readonly float MAX_AIM_VARIANCE = 35f; // Degrees to either side of aimed point.
 
+    public Collider2D plantableColliderSpace;
     public Collider2D scytheCollider;
     public GameObject scytheCrosshairObject;
     public GameObject scytheSwingObject;

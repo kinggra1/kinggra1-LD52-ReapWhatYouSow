@@ -63,8 +63,10 @@ public class InventoryTileController : MonoBehaviour
     public void Decrement() {
         quantity = Mathf.Clamp(quantity - 1, 0, MAX_COUNT);
         if (quantity == 0) {
-            this.itemType = InventoryManager.ItemType.UNKNOWN;
-            this.SetSprite(null);
+            itemType = InventoryManager.ItemType.UNKNOWN;
+            quantity = 0;
+            SetSprite(null);
+            isEmpty = true;
         }
         RefreshGUI();
     }

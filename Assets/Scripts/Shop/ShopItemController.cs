@@ -22,6 +22,10 @@ public class ShopItemController : MonoBehaviour
         
     }
 
+    public void BuyThisCrop() {
+        ShopManager.Instance.BuySeed(associatedCrop);
+    }
+
     public void RefreshGUI() {
         if (InventoryManager.Instance.CanSpendSoul(associatedCrop.storeCost)) {
             blockingOverlay.SetActive(false);
