@@ -3,7 +3,10 @@ guid: 6b6f47d3ff91a7a4eac4a734b186289b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - cropData: {instanceID: 0}
+  - fleeingAnimation: {instanceID: 0}
+  - mythologicalPlantableZone: {fileID: 921774717959709188, guid: acaffd152bee8c64e949bbd6db74fcef, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
